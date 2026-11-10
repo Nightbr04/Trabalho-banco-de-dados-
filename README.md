@@ -1,6 +1,6 @@
-# Gerenciamento de Pedidos (Full Stack)
+# Gerenciamento de Pedidos 
 
-Sistema full stack para gerenciamento de pedidos com frontend e backend separados.
+Sistema para gerenciamento de pedidos com frontend e backend separados.
 
 ## Tecnologias utilizadas
 
