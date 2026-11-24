@@ -1,4 +1,4 @@
--- =====================================================================
+=====================================================================
 -- BLOCO 0: Usa o banco do projeto
 -- =====================================================================
 USE aluguel_equipamentos_medicos;
@@ -186,4 +186,82 @@ INSERT INTO pecas_manutencao (manutencao_id, nome_peca, quantidade, custo) VALUE
 (18, 'Resistência de aquecimento',1, 220.00),
 (19, 'Eletrodo de aplicação',     2,  70.00),
 (20, 'Compressor de oxigênio',    1, 540.00);
+GO
+
+-- =====================================================================
+-- BLOCO 8: CONTRATOS (locações de equipamentos médicos)
+-- =====================================================================
+INSERT INTO contratos (id, cliente_id, equipamento_id, tipo_cobranca, data_inicio, data_fim, valor_total, status_contrato) VALUES
+(1,  1,  1,  'MENSAL', '2026-11-01', '2026-12-01', 1800.00, 'ATIVO'),
+(2,  2,  2,  'MENSAL', '2026-02-01', '2026-03-01',  450.00, 'ENCERRADO'),
+(3,  3,  3,  'MENSAL', '2026-11-05', '2026-12-05',  320.00, 'ATIVO'),
+(4,  4,  4,  'MENSAL', '2026-03-01', '2026-04-01',  900.00, 'ENCERRADO'),
+(5,  5,  5,  'MENSAL', '2026-11-10', '2026-12-10',  600.00, 'ATIVO'),
+(6,  6,  6,  'MENSAL', '2026-01-01', '2026-01-22',  380.00, 'ENCERRADO'),
+(7,  7,  7,  'DIARIA', '2026-04-05', '2026-04-06',   80.00, 'ENCERRADO'),
+(8,  8,  8,  'MENSAL', '2026-11-08', '2026-12-08',  700.00, 'ATIVO'),
+(9,  9,  9,  'DIARIA', '2026-05-02', '2026-05-05',  270.00, 'ENCERRADO'),
+(10, 10, 10, 'MENSAL', '2026-05-01', '2026-06-01', 1100.00, 'ENCERRADO'),
+(11, 11, 11, 'MENSAL', '2026-11-12', '2026-12-12', 1500.00, 'ATIVO'),
+(12, 12, 12, 'MENSAL', '2026-02-18', '2026-02-19', 2500.00, 'CANCELADO'),
+(13, 13, 13, 'MENSAL', '2026-11-14', '2026-12-14', 1200.00, 'ATIVO'),
+(14, 14, 14, 'DIARIA', '2026-07-10', '2026-07-12', 1300.00, 'ENCERRADO'),
+(15, 15, 15, 'MENSAL', '2026-11-15', '2026-12-15',  500.00, 'ATIVO'),
+(16, 16, 16, 'MENSAL', '2026-08-01', '2026-09-01',  250.00, 'ENCERRADO'),
+(17, 17, 17, 'MENSAL', '2026-11-17', '2026-12-17', 2000.00, 'ATIVO'),
+(18, 18, 18, 'MENSAL', '2026-09-01', '2026-10-01', 1000.00, 'ENCERRADO'),
+(19, 19, 19, 'MENSAL', '2026-11-20', '2026-12-20',  400.00, 'ATIVO'),
+(20, 20, 20, 'MENSAL', '2026-03-18', '2026-03-19',  700.00, 'CANCELADO');
+GO
+
+-- =====================================================================
+-- BLOCO 9: FATURAS (cobranças referentes aos contratos de locação)
+-- =====================================================================
+INSERT INTO faturas (contrato_id, valor, data_vencimento, forma_pagamento, nota_fiscal, status) VALUES
+(1,  1800.00, '2026-12-01', 'PIX',           'NF-2026-0001', 'ABERTA'),
+(2,   450.00, '2026-03-01', 'BOLETO',        'NF-2026-0002', 'PAGA'),
+(3,   320.00, '2026-12-05', 'CARTAO',        'NF-2026-0003', 'ABERTA'),
+(4,   900.00, '2026-04-01', 'TRANSFERENCIA', 'NF-2026-0004', 'PAGA'),
+(5,   600.00, '2026-12-10', 'PIX',           'NF-2026-0005', 'PAGA'),
+(6,   380.00, '2026-01-22', 'BOLETO',        'NF-2026-0006', 'VENCIDA'),
+(7,    80.00, '2026-04-06', 'PIX',           'NF-2026-0007', 'PAGA'),
+(8,   700.00, '2026-12-08', 'CARTAO',        'NF-2026-0008', 'ABERTA'),
+(9,   270.00, '2026-05-05', 'DINHEIRO',      'NF-2026-0009', 'PAGA'),
+(10, 1100.00, '2026-06-01', 'BOLETO',        'NF-2026-0010', 'VENCIDA'),
+(11, 1500.00, '2026-12-12', 'TRANSFERENCIA', 'NF-2026-0011', 'ABERTA'),
+(12, 2500.00, '2026-02-19', 'BOLETO',        'NF-2026-0012', 'CANCELADA'),
+(13, 1200.00, '2026-12-14', 'PIX',           'NF-2026-0013', 'PAGA'),
+(14, 1300.00, '2026-07-12', 'CARTAO',        'NF-2026-0014', 'PAGA'),
+(15,  500.00, '2026-12-15', 'PIX',           'NF-2026-0015', 'ABERTA'),
+(16,  250.00, '2026-09-01', 'BOLETO',        'NF-2026-0016', 'PAGA'),
+(17, 2000.00, '2026-12-17', 'TRANSFERENCIA', 'NF-2026-0017', 'ABERTA'),
+(18, 1000.00, '2026-10-01', 'BOLETO',        'NF-2026-0018', 'VENCIDA'),
+(19,  400.00, '2026-12-20', 'CARTAO',        'NF-2026-0019', 'PAGA'),
+(20,  700.00, '2026-03-19', 'PIX',           'NF-2026-0020', 'CANCELADA');
+GO
+
+-- =====================================================================
+-- BLOCO 10: LOGISTICA (entregas e coletas de equipamentos)
+-- =====================================================================
+INSERT INTO logistica (contrato_id, funcionario_id, tipo, data_agendada, rota, status) VALUES
+(1,  3,  'ENTREGA', '2026-11-01 08:00:00', 'Criciúma - Rua das Flores',          'CONCLUIDA'),
+(2,  5,  'COLETA',  '2026-03-01 09:30:00', 'Criciúma - Av. Centenário',          'CONCLUIDA'),
+(3,  9,  'ENTREGA', '2026-11-05 10:00:00', 'Içara - Rua Esperança',              'CONCLUIDA'),
+(4,  15, 'COLETA',  '2026-04-01 14:00:00', 'Forquilhinha - Rua XV de Novembro', 'CONCLUIDA'),
+(5,  19, 'ENTREGA', '2026-11-10 08:30:00', 'Criciúma - Rua Padre Anchieta',      'CONCLUIDA'),
+(6,  3,  'COLETA',  '2026-01-22 15:00:00', 'Araranguá - Rua Hercílio Luz',       'CONCLUIDA'),
+(7,  5,  'COLETA',  '2026-04-06 09:00:00', 'Morro da Fumaça - Rua Principal',   'CONCLUIDA'),
+(8,  9,  'ENTREGA', '2026-11-08 11:30:00', 'Criciúma - Rua Santos Dumont',       'CONCLUIDA'),
+(9,  15, 'COLETA',  '2026-05-05 13:00:00', 'Jaguaruna - Rua Dona Francisca',     'CONCLUIDA'),
+(10, 19, 'COLETA',  '2026-06-01 16:00:00', 'Criciúma - Av. Universitária',       'CONCLUIDA'),
+(11, 3,  'ENTREGA', '2026-11-12 10:30:00', 'Criciúma - Rua Central',             'CONCLUIDA'),
+(12, 5,  'COLETA',  '2026-02-19 08:00:00', 'Criciúma - Av. Santos Dumont',        'CONCLUIDA'),
+(13, 9,  'COLETA',  '2026-12-14 09:00:00', 'Criciúma - Rua Engenheiro Jorge',    'AGENDADA'),
+(14, 15, 'COLETA',  '2026-07-12 14:30:00', 'Içara - Rua Getúlio Vargas',         'CONCLUIDA'),
+(15, 19, 'COLETA',  '2026-12-15 15:00:00', 'Araranguá - Av. Nereu Ramos',         'AGENDADA'),
+(16, 3,  'COLETA',  '2026-09-01 08:30:00', 'Criciúma - Rua Lauro Müller',        'CONCLUIDA'),
+(17, 5,  'COLETA',  '2026-12-17 10:00:00', 'Criciúma - Rua Coronel Pedro Benedet','AGENDADA'),
+(18, 9,  'COLETA',  '2026-10-01 11:00:00', 'Criciúma - Rua Ernesto Stodieck',    'CONCLUIDA'),
+(19, 11, 'COLETA',  '2026-12-20 13:30:00', 'Criciúma - Av. Índio Tibiriçá',       'AGENDADA'),
+(20, 15, 'COLETA',  '2026-03-19 16:30:00', 'Criciúma - Rua Pinheiro Machado',    'CONCLUIDA');
 GO
