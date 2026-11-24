@@ -8,20 +8,19 @@ USE aluguel_equipamentos_medicos;
 GO
 
 -- =====================================================================
--- BLOCO 1: Tabela CLIENTES (cadastro de hospitais, clínicas e pacientes)
--- Constraints: PK, CHECK no tipo, UNIQUE no CPF/CNPJ, DEFAULT na data
+-- BLOCO 1: Tabela CLIENTES (cadastro de pessoas físicas)
+-- Constraints: PK, UNIQUE no CPF, CHECK de 11 dígitos, DEFAULT na data
 -- =====================================================================
 CREATE TABLE clientes (
     id          INT IDENTITY(1,1)  NOT NULL,
     nome        VARCHAR(150)       NOT NULL,
-    tipo        VARCHAR(2)         NULL,
-    cpf_cnpj    VARCHAR(14)        NOT NULL,
+    cpf         VARCHAR(11)        NOT NULL,
     whatsapp    VARCHAR(20)        NOT NULL,
     endereco    VARCHAR(200)       NULL,
     criado_em   DATETIME           NOT NULL CONSTRAINT df_clientes_criado_em DEFAULT GETDATE(),
-    CONSTRAINT pk_clientes            PRIMARY KEY (id),
-    CONSTRAINT uq_clientes_cpf_cnpj   UNIQUE (cpf_cnpj),
-    CONSTRAINT ck_clientes_tipo       CHECK (tipo IN ('PF', 'PJ'))
+    CONSTRAINT pk_clientes        PRIMARY KEY (id),
+    CONSTRAINT uq_clientes_cpf    UNIQUE (cpf),
+    CONSTRAINT ck_clientes_cpf    CHECK (LEN(cpf) = 11 AND cpf NOT LIKE '%[^0-9]%')
 );
 GO
 

@@ -1,169 +1,75 @@
-# Gerenciamento de Pedidos 
+# Aluguel de Equipamentos Médicos
 
-Sistema para gerenciamento de pedidos com frontend e backend separados.
+Banco de dados SQL Server para uma locadora de equipamentos médicos, com uma aplicação web em Java (CRUD) que começa pela tabela `clientes`. Os clientes são **somente pessoas físicas** (identificadas por CPF).
 
-## Tecnologias utilizadas
-
-### Backend
-- Java 21
-- Spring Boot 3.5
-- Spring Web
-- Spring Data JPA
-- Hibernate
-- Bean Validation
-- Maven
-
-### Frontend
-- React 18
-- TypeScript
-- Vite
-- React Router
-- Axios
-- CSS
-
-### Banco de dados
-- PostgreSQL
-- Scripts SQL versionados em `database/scripts`
-
-## Estrutura do projeto
+## Estrutura
 
 ```text
 .
-├── backend
+├── app                     # aplicação web (Java / Spring Boot)
 │   ├── pom.xml
-│   ├── .env.example
 │   └── src
-├── frontend
-│   ├── package.json
-│   ├── .env.example
-│   └── src
-├── database
-│   └── scripts
-│       ├── 001_schema.sql
-│       └── 002_seed.sql
+├── sql
+│   ├── ddl/01_criar_banco.sql        # criação do banco, tabelas e constraints
+│   ├── dml/02_popular_tabelas.sql    # dados de exemplo
+│   └── consultas/00_contagem_linhas.sql
 └── README.md
 ```
 
-## Funcionalidades da primeira etapa
+## Tecnologias
 
-- Estrutura completa de projeto frontend/backend.
-- API REST base com CRUD de pedidos.
-- Endpoints de clientes e produtos para cadastro e listagem.
-- Validação de dados com Bean Validation.
-- Tratamento centralizado de excecoes.
-- DTOs para nao expor entidades JPA diretamente.
-- CORS configurado para frontend local.
-- Script de schema PostgreSQL com constraints e relacionamentos.
-- Tela administrativa inicial de gerenciamento de pedidos.
-- Integracao frontend-backend preparada com Axios e variaveis de ambiente.
-- Estrutura inicial de testes (JUnit 5/Mockito/Spring Boot Test e Vitest no frontend).
-
-## Modelagem do banco (PostgreSQL)
-
-Entidades:
-- clientes
-- produtos
-- pedidos
-- itens_pedido
-
-Relacionamentos:
-- 1 cliente para N pedidos
-- 1 pedido para N itens_pedido
-- 1 produto para N itens_pedido
-
-Regras garantidas por schema e aplicacao:
-- Sem quantidade negativa
-- Sem preco invalido
-- Pedido deve conter ao menos um item
-- Valor total calculado com base nos itens
-
-## Pre-requisitos
-
-- Java 21+
+- Java 17+
+- Spring Boot 3.5 (Spring Web, Thymeleaf, Spring Data JPA, Bean Validation)
 - Maven 3.9+
-- Node.js 20+
-- npm 10+
-- PostgreSQL 14+
+- SQL Server
 
-## Configuracao do PostgreSQL
+## Banco de dados
 
-1. Crie um banco chamado `gerenciamento_pedidos`.
-2. Execute os scripts:
+Execute os scripts nesta ordem (SSMS, Azure Data Studio ou `sqlcmd`):
 
-```sql
--- no psql ou ferramenta equivalente
-\i database/scripts/001_schema.sql
-\i database/scripts/002_seed.sql
-```
+1. `sql/ddl/01_criar_banco.sql`
+2. `sql/dml/02_popular_tabelas.sql`
 
-## Variaveis de ambiente
+Tabela `clientes`:
 
-### Backend (`backend/.env.example`)
-- DB_HOST
-- DB_PORT
-- DB_NAME
-- DB_USER
-- DB_PASSWORD
-- SERVER_PORT
-- FRONTEND_URL
+| Coluna      | Tipo         | Regras                                  |
+|-------------|--------------|-----------------------------------------|
+| `id`        | INT IDENTITY | PK                                      |
+| `nome`      | VARCHAR(150) | obrigatório                             |
+| `cpf`       | VARCHAR(11)  | obrigatório, único, 11 dígitos numéricos |
+| `whatsapp`  | VARCHAR(20)  | obrigatório                             |
+| `endereco`  | VARCHAR(200) | opcional                                |
+| `criado_em` | DATETIME     | `DEFAULT GETDATE()`                     |
 
-### Frontend (`frontend/.env.example`)
-- VITE_API_BASE_URL
+## Executando a aplicação
 
-## Como executar o backend
+Defina as variáveis de ambiente (as credenciais não ficam no repositório):
 
-```bash
-cd backend
+| Variável      | Padrão                          |
+|---------------|---------------------------------|
+| `DB_USER`     | (obrigatória)                   |
+| `DB_PASSWORD` | (obrigatória)                   |
+| `DB_HOST`     | `localhost`                     |
+| `DB_PORT`     | `1433`                          |
+| `DB_NAME`     | `aluguel_equipamentos_medicos`  |
+| `SERVER_PORT` | `8080`                          |
+
+```powershell
+$env:DB_USER = "sa"
+$env:DB_PASSWORD = "sua_senha"
+cd app
 mvn spring-boot:run
 ```
 
-API base: `http://localhost:8080/api`
+Acesse `http://localhost:8080/clientes`. O SQL Server precisa aceitar conexões TCP/IP na porta configurada.
 
-## Como executar o frontend
+## CRUD de clientes
 
-```bash
-cd frontend
-npm install
-npm run dev
-```
+| Ação      | Rota                              |
+|-----------|-----------------------------------|
+| Listar / buscar por nome ou CPF | `GET /clientes?busca=...` |
+| Novo      | `GET /clientes/novo` · `POST /clientes` |
+| Editar    | `GET /clientes/{id}/editar` · `POST /clientes/{id}` |
+| Excluir   | `POST /clientes/{id}/excluir`     |
 
-App web: `http://localhost:5173`
-
-## Comandos de validacao
-
-Backend:
-
-```bash
-cd backend
-mvn test
-```
-
-Frontend:
-
-```bash
-cd frontend
-npm run build
-```
-
-## Endpoints principais
-
-Pedidos:
-- GET /api/pedidos
-- GET /api/pedidos/{id}
-- POST /api/pedidos
-- PUT /api/pedidos/{id}
-- DELETE /api/pedidos/{id}
-
-Clientes:
-- GET /api/clientes
-- POST /api/clientes
-
-Produtos:
-- GET /api/produtos
-- POST /api/produtos
-
-## Observacoes
-
-- O frontend nao acessa o banco diretamente.
-- Toda comunicacao ocorre via API REST do backend.
-- Credenciais nao devem ser versionadas em arquivos reais de ambiente.
+Regras na aplicação: nome, CPF e WhatsApp obrigatórios; CPF com 11 dígitos e sem duplicidade; clientes com atendimentos ou contratos vinculados não podem ser excluídos (FK).

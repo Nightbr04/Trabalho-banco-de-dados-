@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:text="${cliente.id == null} ? 'Novo cliente' : 'Editar cliente'">Cliente</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<main class="estreito">
+    <h1 th:text="${cliente.id == null} ? 'Novo cliente' : 'Editar cliente'">Cliente</h1>
+
+    <form method="post" novalidate
+          th:action="${cliente.id == null} ? @{/clientes} : @{/clientes/{id}(id=${cliente.id})}"
+          th:object="${cliente}">
+
+        <label>Nome
+            <input type="text" th:field="*{nome}" maxlength="150" required>
+            <span class="erro" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
+        </label>
+
+        <label>CPF (somente números)
+            <input type="text" th:field="*{cpf}" maxlength="11" inputmode="numeric" required>
+            <span class="erro" th:if="${#fields.hasErrors('cpf')}" th:errors="*{cpf}"></span>
+        </label>
+
+        <label>WhatsApp
+            <input type="text" th:field="*{whatsapp}" maxlength="20" inputmode="tel" required>
+            <span class="erro" th:if="${#fields.hasErrors('whatsapp')}" th:errors="*{whatsapp}"></span>
+        </label>
+
+        <label>Endereço
+            <input type="text" th:field="*{endereco}" maxlength="200">
+            <span class="erro" th:if="${#fields.hasErrors('endereco')}" th:errors="*{endereco}"></span>
+        </label>
+
+        <div class="botoes">
+            <button class="btn btn-primario" type="submit">Salvar</button>
+            <a class="btn" th:href="@{/clientes}">Cancelar</a>
+        </div>
+    </form>
+</main>
+</body>
+</html>

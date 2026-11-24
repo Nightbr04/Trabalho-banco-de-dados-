@@ -7,29 +7,29 @@ SET DATEFORMAT ymd;
 GO
 
 -- =====================================================================
--- BLOCO 1: CLIENTES (10 pessoas físicas e 10 jurídicas)
+-- BLOCO 1: CLIENTES (20 pessoas físicas)
 -- =====================================================================
-INSERT INTO clientes (nome, tipo, cpf_cnpj, whatsapp, endereco) VALUES
-('Maria Oliveira Santos', 'PF', '12345678901', '48999110001', 'Rua das Flores, 100 - Criciúma/SC'),
-('João Pedro Almeida', 'PF', '23456789012', '48999110002', 'Av. Centenário, 250 - Criciúma/SC'),
-('Ana Clara Ferreira', 'PF', '34567890123', '48999110003', 'Rua Esperança, 45 - Içara/SC'),
-('Carlos Eduardo Lima', 'PF', '45678901234', '48999110004', 'Rua XV de Novembro, 800 - Forquilhinha/SC'),
-('Fernanda Souza Rocha', 'PF', '56789012345', '48999110005', 'Rua Padre Anchieta, 12 - Criciúma/SC'),
-('Ricardo Mendes Costa', 'PF', '67890123456', '48999110006', 'Rua Hercílio Luz, 300 - Araranguá/SC'),
-('Juliana Ribeiro Pires', 'PF', '78901234567', '48999110007', 'Rua Principal, 77 - Morro da Fumaça/SC'),
-('Marcos Vinícius Dias', 'PF', '89012345678', '48999110008', 'Rua Santos Dumont, 9 - Criciúma/SC'),
-('Patrícia Gomes Nunes', 'PF', '90123456789', '48999110009', 'Rua Dona Francisca, 55 - Jaguaruna/SC'),
-('Rafael Teixeira Melo', 'PF', '01234567890', '48999110010', 'Av. Universitária, 1200 - Criciúma/SC'),
-('Clínica Vida Saudável Ltda', 'PJ', '11222333000144', '48333100001', 'Rua Central, 500 - Criciúma/SC'),
-('Hospital São Lucas', 'PJ', '22333444000155', '48333100002', 'Av. Santos Dumont, 1500 - Criciúma/SC'),
-('Centro Estético Beleza Pura', 'PJ', '33444555000166', '48333100003', 'Rua Engenheiro Jorge, 88 - Criciúma/SC'),
-('Laboratório Diagnóstico Norte', 'PJ', '44555666000177', '48333100004', 'Rua Getúlio Vargas, 320 - Içara/SC'),
-('Clínica Ortopédica Sul', 'PJ', '55666777000188', '48333100005', 'Av. Nereu Ramos, 410 - Araranguá/SC'),
-('Home Care Cuidar Bem', 'PJ', '66777888000199', '48333100006', 'Rua Lauro Müller, 65 - Criciúma/SC'),
-('Pronto Atendimento Central', 'PJ', '77888999000100', '48333100007', 'Rua Coronel Pedro Benedet, 14 - Criciúma/SC'),
-('Instituto Renascer', 'PJ', '88999000000111', '48333100008', 'Rua Ernesto Stodieck, 230 - Criciúma/SC'),
-('Fisioterapia Movimento', 'PJ', '99000111000122', '48333100009', 'Av. Índio Tibiriçá, 700 - Criciúma/SC'),
-('Clínica Odonto Sorriso', 'PJ', '10111213000133', '48333100010', 'Rua Pinheiro Machado, 41 - Criciúma/SC');
+INSERT INTO clientes (nome, cpf, whatsapp, endereco) VALUES
+('Maria Oliveira Santos', '12345678901', '48999110001', 'Rua das Flores, 100 - Criciúma/SC'),
+('João Pedro Almeida', '23456789012', '48999110002', 'Av. Centenário, 250 - Criciúma/SC'),
+('Ana Clara Ferreira', '34567890123', '48999110003', 'Rua Esperança, 45 - Içara/SC'),
+('Carlos Eduardo Lima', '45678901234', '48999110004', 'Rua XV de Novembro, 800 - Forquilhinha/SC'),
+('Fernanda Souza Rocha', '56789012345', '48999110005', 'Rua Padre Anchieta, 12 - Criciúma/SC'),
+('Ricardo Mendes Costa', '67890123456', '48999110006', 'Rua Hercílio Luz, 300 - Araranguá/SC'),
+('Juliana Ribeiro Pires', '78901234567', '48999110007', 'Rua Principal, 77 - Morro da Fumaça/SC'),
+('Marcos Vinícius Dias', '89012345678', '48999110008', 'Rua Santos Dumont, 9 - Criciúma/SC'),
+('Patrícia Gomes Nunes', '90123456789', '48999110009', 'Rua Dona Francisca, 55 - Jaguaruna/SC'),
+('Rafael Teixeira Melo', '01234567890', '48999110010', 'Av. Universitária, 1200 - Criciúma/SC'),
+('Luciana Martins Prado', '11122233344', '48999110011', 'Rua Central, 500 - Criciúma/SC'),
+('Roberto Carlos Andrade', '22233344455', '48999110012', 'Av. Santos Dumont, 1500 - Criciúma/SC'),
+('Tatiane Borges Vieira', '33344455566', '48999110013', 'Rua Engenheiro Jorge, 88 - Criciúma/SC'),
+('Sérgio Luiz Monteiro', '44455566677', '48999110014', 'Rua Getúlio Vargas, 320 - Içara/SC'),
+('Débora Cristina Farias', '55566677788', '48999110015', 'Av. Nereu Ramos, 410 - Araranguá/SC'),
+('Alexandre Duarte Neto', '66677788899', '48999110016', 'Rua Lauro Müller, 65 - Criciúma/SC'),
+('Simone Aparecida Lopes', '77788899900', '48999110017', 'Rua Coronel Pedro Benedet, 14 - Criciúma/SC'),
+('Paulo Henrique Brandão', '88899900011', '48999110018', 'Rua Ernesto Stodieck, 230 - Criciúma/SC'),
+('Cláudia Regina Matos', '99900011122', '48999110019', 'Av. Índio Tibiriçá, 700 - Criciúma/SC'),
+('Marcelo Augusto Pacheco', '10111213141', '48999110020', 'Rua Pinheiro Machado, 41 - Criciúma/SC');
 GO
 
 -- =====================================================================
@@ -124,14 +124,14 @@ INSERT INTO atendimentos_crm (cliente_id, canal, assunto, mensagem, criado_em) V
 (8,  'EMAIL',    'Nota fiscal',      'Solicitou segunda via da nota fiscal.',              '2026-02-03 09:40:00'),
 (9,  'WHATSAPP', 'Orçamento',        'Cotação de monitor multiparamétrico.',               '2026-02-08 15:25:00'),
 (10, 'SITE',     'Dúvida',           'Perguntou sobre prazo mínimo de locação.',           '2026-02-10 12:10:00'),
-(11, 'TELEFONE', 'Renovação',        'Clínica quer renovar contrato do ultrassom.',        '2026-02-15 10:05:00'),
+(11, 'TELEFONE', 'Renovação',        'Cliente quer renovar a locação do ultrassom.',       '2026-02-15 10:05:00'),
 (12, 'EMAIL',    'Reclamação',       'Raio-X apresentou falha no primeiro dia de uso.',    '2026-02-18 17:30:00'),
-(13, 'WHATSAPP', 'Orçamento',        'Estética pediu orçamento de laser para 2 unidades.', '2026-02-20 11:50:00'),
+(13, 'WHATSAPP', 'Orçamento',        'Cliente pediu orçamento de laser para 2 unidades.',  '2026-02-20 11:50:00'),
 (14, 'SITE',     'Dúvida técnica',   'Consultou o manual de uso da fototerapia.',          '2026-02-25 14:00:00'),
 (15, 'TELEFONE', 'Coleta',           'Solicitou coleta após fim da locação.',              '2026-03-02 08:45:00'),
 (16, 'WHATSAPP', 'Orçamento',        'Pediu cotação de colchão pneumático.',               '2026-03-05 16:20:00'),
-(17, 'EMAIL',    'Renovação',        'Hospital quer manter a incubadora por mais 6 meses.','2026-03-10 10:00:00'),
-(18, 'SITE',     'Orçamento',        'Solicitou orçamento de esterilizador para centro.',  '2026-03-12 13:35:00'),
+(17, 'EMAIL',    'Renovação',        'Cliente quer manter a incubadora por mais 6 meses.', '2026-03-10 10:00:00'),
+(18, 'SITE',     'Orçamento',        'Solicitou orçamento de esterilizador de uso pessoal.','2026-03-12 13:35:00'),
 (19, 'WHATSAPP', 'Dúvida',           'Perguntou sobre sessões do aparelho de eletroterapia.','2026-03-15 09:15:00'),
 (20, 'TELEFONE', 'Reclamação',       'Concentrador apresentou ruído, cliente solicitou troca.','2026-03-18 18:00:00');
 GO

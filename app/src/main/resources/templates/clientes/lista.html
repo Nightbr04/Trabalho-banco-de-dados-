@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Clientes</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<main>
+    <header class="topo">
+        <h1>Clientes <small>(pessoa física)</small></h1>
+        <a class="btn btn-primario" th:href="@{/clientes/novo}">Novo cliente</a>
+    </header>
+
+    <div class="alerta alerta-sucesso" th:if="${sucesso}" th:text="${sucesso}"></div>
+    <div class="alerta alerta-erro" th:if="${erro}" th:text="${erro}"></div>
+
+    <form class="busca" method="get" th:action="@{/clientes}">
+        <input type="search" name="busca" th:value="${busca}" placeholder="Buscar por nome ou CPF">
+        <button class="btn" type="submit">Buscar</button>
+        <a class="btn" th:if="${busca}" th:href="@{/clientes}">Limpar</a>
+    </form>
+
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>CPF</th>
+            <th>WhatsApp</th>
+            <th>Endereço</th>
+            <th>Cadastro</th>
+            <th class="acoes">Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="c : ${clientes}">
+            <td th:text="${c.id}"></td>
+            <td th:text="${c.nome}"></td>
+            <td th:text="${c.cpf}"></td>
+            <td th:text="${c.whatsapp}"></td>
+            <td th:text="${c.endereco}"></td>
+            <td th:text="${#temporals.format(c.criadoEm, 'dd/MM/yyyy')}"></td>
+            <td class="acoes">
+                <a class="btn" th:href="@{/clientes/{id}/editar(id=${c.id})}">Editar</a>
+                <form method="post" th:action="@{/clientes/{id}/excluir(id=${c.id})}"
+                      onsubmit="return confirm('Excluir este cliente?');">
+                    <button class="btn btn-perigo" type="submit">Excluir</button>
+                </form>
+            </td>
+        </tr>
+        <tr th:if="${#lists.isEmpty(clientes)}">
+            <td colspan="7" class="vazio">Nenhum cliente encontrado.</td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+</body>
+</html>
