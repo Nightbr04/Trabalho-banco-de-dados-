@@ -187,3 +187,81 @@ INSERT INTO pecas_manutencao (manutencao_id, nome_peca, quantidade, custo) VALUE
 (19, 'Eletrodo de aplicação',     2,  70.00),
 (20, 'Compressor de oxigênio',    1, 540.00);
 GO
+
+-- =====================================================================
+-- BLOCO 8: CONTRATOS (20 contratos variados: ativos, encerrados e cancelados)
+-- =====================================================================
+INSERT INTO contratos (cliente_id, equipamento_id, tipo_cobranca, data_inicio, data_fim, valor_total, status_contrato) VALUES
+(1,  1,  'MENSAL',  '2026-01-06 09:00:00', '2026-04-06 09:00:00', 5400.00, 'ATIVO'),
+(2,  2,  'DIARIA',  '2026-01-08 10:00:00', '2026-01-18 10:00:00',  450.00, 'ENCERRADO'),
+(3,  3,  'MENSAL',  '2026-01-13 08:30:00', '2026-07-13 08:30:00', 1920.00, 'ATIVO'),
+(4,  4,  'DIARIA',  '2026-01-16 14:00:00', '2026-01-26 14:00:00',  900.00, 'ENCERRADO'),
+(5,  5,  'MENSAL',  '2026-01-21 11:00:00', NULL,                  1800.00, 'ATIVO'),
+(6,  6,  'MENSAL',  '2026-01-23 09:00:00', '2026-02-23 09:00:00',  380.00, 'ENCERRADO'),
+(7,  7,  'DIARIA',  '2026-02-02 10:00:00', '2026-02-12 10:00:00',   80.00, 'ENCERRADO'),
+(8,  8,  'MENSAL',  '2026-02-04 13:00:00', '2026-08-04 13:00:00', 4200.00, 'ATIVO'),
+(9,  9,  'DIARIA',  '2026-02-09 15:00:00', '2026-02-14 15:00:00',   90.00, 'CANCELADO'),
+(10, 10, 'MENSAL',  '2026-02-11 08:00:00', '2026-03-11 08:00:00', 1100.00, 'ENCERRADO'),
+(11, 11, 'MENSAL',  '2026-02-16 09:30:00', '2026-08-16 09:30:00', 9000.00, 'ATIVO'),
+(12, 12, 'MEDICAO', '2026-02-19 10:00:00', '2026-03-19 10:00:00', 2500.00, 'CANCELADO'),
+(13, 13, 'MEDICAO', '2026-02-21 11:00:00', '2026-05-21 11:00:00', 3600.00, 'ATIVO'),
+(14, 14, 'MENSAL',  '2026-02-26 14:00:00', '2026-03-26 14:00:00',  650.00, 'ENCERRADO'),
+(15, 15, 'MENSAL',  '2026-03-03 09:00:00', '2026-06-03 09:00:00', 1500.00, 'ATIVO'),
+(16, 16, 'DIARIA',  '2026-03-06 16:00:00', '2026-03-20 16:00:00',  250.00, 'ENCERRADO'),
+(17, 17, 'MENSAL',  '2026-03-11 08:00:00', '2026-09-11 08:00:00',12000.00, 'ATIVO'),
+(18, 18, 'MENSAL',  '2026-03-13 13:00:00', '2026-04-13 13:00:00', 1000.00, 'ENCERRADO'),
+(19, 19, 'MEDICAO', '2026-03-16 10:00:00', NULL,                  1200.00, 'ATIVO'),
+(20, 20, 'MENSAL',  '2026-03-19 11:30:00', '2026-04-19 11:30:00',  700.00, 'CANCELADO');
+GO
+
+-- =====================================================================
+-- BLOCO 9: FATURAS (20 cobranças vinculadas aos contratos)
+-- =====================================================================
+INSERT INTO faturas (contrato_id, valor, data_vencimento, forma_pagamento, nota_fiscal, status) VALUES
+(1,  1800.00, '2026-02-06', 'BOLETO',        'NF-2026-0001', 'PAGA'),
+(2,   450.00, '2026-01-20', 'PIX',           'NF-2026-0002', 'PAGA'),
+(3,   320.00, '2026-02-13', 'BOLETO',        'NF-2026-0003', 'PAGA'),
+(4,   900.00, '2026-01-28', 'CARTAO',        'NF-2026-0004', 'PAGA'),
+(5,   600.00, '2026-02-21', 'PIX',           'NF-2026-0005', 'PAGA'),
+(6,   380.00, '2026-02-25', 'BOLETO',        'NF-2026-0006', 'VENCIDA'),
+(7,    80.00, '2026-02-15', 'PIX',           'NF-2026-0007', 'PAGA'),
+(8,   700.00, '2026-03-04', 'BOLETO',        'NF-2026-0008', 'PAGA'),
+(9,    90.00, '2026-02-16', 'PIX',           NULL,           'CANCELADA'),
+(10, 1100.00, '2026-03-12', 'TRANSFERENCIA', 'NF-2026-0009', 'PAGA'),
+(11, 1500.00, '2026-03-16', 'BOLETO',        'NF-2026-0010', 'PAGA'),
+(12, 2500.00, '2026-03-20', 'BOLETO',        NULL,           'CANCELADA'),
+(13, 1200.00, '2026-03-21', 'CARTAO',        'NF-2026-0011', 'PAGA'),
+(14,  650.00, '2026-03-28', 'PIX',           'NF-2026-0012', 'VENCIDA'),
+(15,  500.00, '2026-04-03', 'BOLETO',        'NF-2026-0013', 'ABERTA'),
+(16,  250.00, '2026-03-22', 'PIX',           'NF-2026-0014', 'PAGA'),
+(17, 2000.00, '2026-04-11', 'TRANSFERENCIA', 'NF-2026-0015', 'ABERTA'),
+(18, 1000.00, '2026-04-15', 'BOLETO',        'NF-2026-0016', 'ABERTA'),
+(19,  400.00, '2026-04-16', 'PIX',           'NF-2026-0017', 'ABERTA'),
+(20,  700.00, '2026-04-20', 'BOLETO',        NULL,           'CANCELADA');
+GO
+
+-- =====================================================================
+-- BLOCO 10: LOGISTICA (20 agendamentos de entrega e coleta)
+-- =====================================================================
+INSERT INTO logistica (contrato_id, funcionario_id, tipo, data_agendada, rota, status) VALUES
+(1,  3,  'ENTREGA', '2026-01-06 08:00:00', 'Rota Centro - Criciúma',        'CONCLUIDA'),
+(2,  5,  'ENTREGA', '2026-01-08 09:00:00', 'Rota Av. Centenário - Criciúma','CONCLUIDA'),
+(2,  5,  'COLETA',  '2026-01-18 14:00:00', 'Rota Av. Centenário - Criciúma','CONCLUIDA'),
+(3,  9,  'ENTREGA', '2026-01-13 08:00:00', 'Rota Içara - Centro',           'CONCLUIDA'),
+(4,  15, 'ENTREGA', '2026-01-16 13:00:00', 'Rota Forquilhinha',             'CONCLUIDA'),
+(4,  15, 'COLETA',  '2026-01-26 15:00:00', 'Rota Forquilhinha',             'CONCLUIDA'),
+(5,  19, 'ENTREGA', '2026-01-21 10:00:00', 'Rota Centro - Criciúma',        'CONCLUIDA'),
+(6,  3,  'ENTREGA', '2026-01-23 08:30:00', 'Rota Araranguá - Sul',          'CONCLUIDA'),
+(6,  3,  'COLETA',  '2026-02-23 16:00:00', 'Rota Araranguá - Sul',          'CONCLUIDA'),
+(7,  5,  'ENTREGA', '2026-02-02 09:30:00', 'Rota Morro da Fumaça',          'CONCLUIDA'),
+(8,  9,  'ENTREGA', '2026-02-04 11:00:00', 'Rota Santos Dumont - Criciúma', 'CONCLUIDA'),
+(9,  11, 'ENTREGA', '2026-02-09 14:00:00', 'Rota Jaguaruna',                'CANCELADA'),
+(10, 15, 'ENTREGA', '2026-02-11 08:00:00', 'Rota Universitária - Criciúma', 'CONCLUIDA'),
+(11, 19, 'ENTREGA', '2026-02-16 09:00:00', 'Rota Clínicas - Criciúma',      'CONCLUIDA'),
+(12, 3,  'ENTREGA', '2026-02-19 09:30:00', 'Rota Hospitalar - Criciúma',    'CANCELADA'),
+(13, 5,  'ENTREGA', '2026-02-21 10:30:00', 'Rota Centro - Criciúma',        'CONCLUIDA'),
+(15, 9,  'ENTREGA', '2026-03-03 08:30:00', 'Rota Araranguá - Centro',       'EM_ROTA'),
+(17, 15, 'ENTREGA', '2026-03-11 07:30:00', 'Rota Hospitalar - Criciúma',    'AGENDADA'),
+(18, 19, 'COLETA',  '2026-04-13 14:00:00', 'Rota Centro - Criciúma',        'AGENDADA'),
+(19, 11, 'ENTREGA', '2026-03-16 09:00:00', 'Rota Av. Índio Tibiriçá',       'AGENDADA');
+GO
